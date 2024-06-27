@@ -1,26 +1,33 @@
 class BooksController < ApplicationController
-  def new
-    @book = List.new
-  end
 
   def show
+    @book = List.find(params[:id])
   end
 
   def edit
+    @book = List.find(params[:id])
   end
 
   def index
+    @book = List.new
+    @lists = List.all
+
   end
   
   def create
-    book = List.new(list_params)
-    if book.save
-      redirect_to book_path(@book.id)
-    else
-      render :index
-    end
+  book = List.new(list_params)
+  if book.save
+    redirect_to book_path(book.id)
+  else
+    render :new
+  end
   end
 
+def destroy
+  book = List.find(params[:id])
+  book.destroy
+    redirect_to books_path
+end
 
 private
 
