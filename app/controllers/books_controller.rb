@@ -5,7 +5,7 @@ class BooksController < ApplicationController
   end
 
   def edit
-    @book = List.find(params[:id])
+    @books = List.find(params[:id])
   end
 
   def index
@@ -19,7 +19,7 @@ class BooksController < ApplicationController
   if book.save
     redirect_to book_path(book.id)
   else
-    render :new
+    render :index
   end
   end
 
@@ -29,6 +29,11 @@ def destroy
     redirect_to books_path
 end
 
+def update
+  book = List.find(params[:id])
+  book.update(list_params)
+  redirect_to book_path(book.id)
+end
 private
 
   def list_params

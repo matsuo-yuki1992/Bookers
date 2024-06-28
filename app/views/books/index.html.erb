@@ -9,21 +9,21 @@
     <tr>
         <td><%= list.title %></td>
         <td><%= list.body %></td>
-        <td><%= link_to "show",book_path(list.id) %></td>
-        <td><%= link_to "edit",edit_book_path(list.id) %></td>
-        <td><%= link_to "destroy",destroy_book_path(list.id), method: :DELETE ,"data-confirm" => "本当に削除しますか？" %></td>
+        <td><%= link_to "Show",book_path(list.id) %></td>
+        <td><%= link_to "Edit",edit_book_path(list.id) %></td>
+        <td><%= link_to "Destroy",destroy_book_path(list.id), method: :DELETE ,"data-confirm" => "Are you sure?" %></td>
     <% end %>
 </table>
 
 <h2>New book</h2>
 <%= form_with model: @book, url: '/books',　method: :post do |f| %>
 
-<p>Title</p>
+<p class="form">Title</p>
 <%= f.text_field :title %>
 
-<p>Body</p>
+<p class="form">Body</p>
 <%= f.text_area :body %>
 
-<p><%= f.submit 'Create Book' %></p>
+<p class="submit"><%= f.submit 'Create Book' %></p>
 
 <% end %>
