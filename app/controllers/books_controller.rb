@@ -15,9 +15,10 @@ class BooksController < ApplicationController
   end
   
   def create
-  book = List.new(list_params)
-  if book.save
-    redirect_to book_path(book.id)
+  @book = List.new(list_params)
+  if @book.save
+    flash[:notice] ="Book was successfully created."
+    redirect_to book_path(@book.id)
   else
     render :index
   end
@@ -30,9 +31,13 @@ def destroy
 end
 
 def update
-  book = List.find(params[:id])
-  book.update(list_params)
-  redirect_to book_path(book.id)
+  @books = List.find(params[:id])
+  if @books.update(list_params)
+  flash[:notice] ="Book was successfully updated."
+  redirect_to book_path(@books.id)
+  else
+  render :edit
+  end
 end
 private
 
