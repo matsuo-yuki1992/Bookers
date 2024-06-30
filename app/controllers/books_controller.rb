@@ -1,38 +1,39 @@
 class BooksController < ApplicationController
 
   def show
-    @book = List.find(params[:id])
+    @book = Book.find(params[:id])
   end
 
   def edit
-    @books = List.find(params[:id])
+    @books = Book.find(params[:id])
   end
 
   def index
-    @book = List.new
-    @lists = List.all
+    @book = Book.new
+    @lists = Book.all
 
   end
   
   def create
-  @book = List.new(list_params)
+  @book = Book.new(book_params)
   if @book.save
     flash[:notice] ="Book was successfully created."
     redirect_to book_path(@book.id)
   else
+    @lists = Book.all
     render :index
   end
   end
 
 def destroy
-  book = List.find(params[:id])
+  book = Book.find(params[:id])
   book.destroy
     redirect_to books_path
 end
 
 def update
-  @books = List.find(params[:id])
-  if @books.update(list_params)
+  @books = Book.find(params[:id])
+  if @books.update(book_params)
   flash[:notice] ="Book was successfully updated."
   redirect_to book_path(@books.id)
   else
@@ -41,8 +42,8 @@ def update
 end
 private
 
-  def list_params
-    params.require(:list).permit(:title, :body,)
+  def book_params
+    params.require(:book).permit(:title, :body,)
   end
   
 end
